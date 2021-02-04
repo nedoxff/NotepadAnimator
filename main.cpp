@@ -24,7 +24,7 @@ int main() {
     FfmpegHelper::SplitAudio(videoPath);
     nc.AddText("OK\n");
     FrameConverter::InitializeGdiplus();
-    std::cout << FrameConverter::Convert("Frames/Input/100.png");
-    std::cin.get();
+    for(auto& file: DirectoryHelper::SortFiles(L"Frames/Input"))
+		nc.SetText(FrameConverter::Convert(file));
     return 0;
 }
