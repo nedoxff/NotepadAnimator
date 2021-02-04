@@ -14,7 +14,8 @@ std::string FrameConverter::Convert(const std::filesystem::path &file) {
         for(int x = 0; x < bitmap.GetWidth(); x++)
         {
             bitmap.GetPixel(x, y, &pixel);
-            int index = pixel.GetR() / static_cast<int>(AsciiList.length());
+            //int index = pixel.GetR() / static_cast<int>(AsciiList.length());
+			int index = MapNumbers(pixel.GetR(), 0, 255, 0, AsciiList.length() - 1);
             result << AsciiList[index];
         }
         result << "\n";
