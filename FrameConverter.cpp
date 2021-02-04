@@ -2,7 +2,7 @@
 #include <gdiplusinit.h>
 #include <sstream>
 
-std::string FrameConverter::AsciiList = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/|()1{}[]?-_+~<>i!lI;:,\"^`'. ";
+std::string FrameConverter::AsciiList = ".,:;+*?%S#@";
 
 std::string FrameConverter::Convert(const std::filesystem::path &file) {
     std::stringstream result;
