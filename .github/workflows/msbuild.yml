@@ -21,6 +21,13 @@ jobs:
     
     - name: Get latest CMake and ninja
       uses: lukka/get-cmake@latest
+      
+    - name: Build & Test
+      uses: ashutoshvarma/action-cmake-build@master
+      with:
+          build-dir: ${{ runner.workspace }}/build
+          build-type: ${{env.BUILD_CONFIGURATION}}
+          configure-options: -G "Visual Studio 16 2019"
     
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1
