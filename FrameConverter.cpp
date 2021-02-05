@@ -2,8 +2,7 @@
 #include <gdiplusinit.h>
 #include <sstream>
 
-std::string FrameConverter::AsciiList = ".,:;+*?%S#@";
-
+std::string FrameConverter::AsciiList = "@#S%>&+;:.,";
 std::string FrameConverter::Convert(const std::filesystem::path &file) {
     std::stringstream result;
     Gdiplus::Bitmap bitmap = Gdiplus::Bitmap(file.wstring().c_str());

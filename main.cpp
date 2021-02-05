@@ -6,6 +6,7 @@
 #include "FfmpegHelper.hpp"
 #include "FrameConverter.hpp"
 int main() {
+    ShowWindow(GetConsoleWindow(), SW_HIDE);
     NotepadController nc{};
     nc.StartNew();
     nc.SetText("Welcome to NotepadAnimator!\nPlease, enter the path of your video:\n");
@@ -23,6 +24,12 @@ int main() {
     nc.AddText("OK\n[40%] Getting audio from the video.. ");
     FfmpegHelper::SplitAudio(videoPath);
     nc.AddText("OK\n");
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    nc.SetText("Press P to play!\n");
+    nc.MoveCaretDown();
+    nc.WaitForInput([](const std::string& string){
+        return string == "p" || string == "P";
+    });
     FrameConverter::InitializeGdiplus();
     for(auto& file: DirectoryHelper::SortFiles(L"Frames/Input"))
 		nc.SetText(FrameConverter::Convert(file));

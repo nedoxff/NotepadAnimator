@@ -18,6 +18,7 @@ public:
     void AddText(const std::string& text) const;
     void MoveCaret(int x, int y) const;
     void MoveCaretDown() const;
+    std::string GetText();
     std::string WaitForInput(const std::function<bool(const std::string&)>& callback) const;
     std::string WaitForInput(const std::function<bool(const std::string&)>& callback, const std::function<void()>& errorCallback) const;
 private:

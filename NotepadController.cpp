@@ -93,6 +93,10 @@ void NotepadController::AddText(const std::string &text) const {
     SendMessage(EditHandle, WM_SETTEXT, 0, (LPARAM)sCurrentText.c_str());
 }
 
+std::string NotepadController::GetText() {
+    return std::string();
+}
+
 
 
 
