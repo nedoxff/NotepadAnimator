@@ -31,5 +31,5 @@ jobs:
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: cmake -G "Visual Studio 16 2019" |
-           msbuild ALL_BUILD.vcxproj /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
+           msbuild ALL_BUILD.vcxproj /m /p:Configuration=${{env.BUILD_CONFIGURATION}}
            
