@@ -94,7 +94,9 @@ void NotepadController::AddText(const std::string &text) const {
 }
 
 std::string NotepadController::GetText() {
-    return std::string();
+    char* cpCurrentText = new char[65535];
+    SendMessage(EditHandle, WM_GETTEXT, (WPARAM)65535, (LPARAM)cpCurrentText);
+    std::string sCurrentText = std::string(cpCurrentText);
 }
 
 
