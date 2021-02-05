@@ -37,14 +37,6 @@ void NotepadController::SetTitle(const std::string& text) const {
     SendMessage(WindowHandle, WM_SETTEXT, 0, (LPARAM)text.c_str());
 }
 
-void NotepadController::MoveCaret(int x, int y) const {
-    SendMessage(EditHandle, EM_SETSEL, x, y);
-}
-
-void NotepadController::MoveCaretDown() const {
-    MoveCaret(0, -1);
-    MoveCaret(-1, -1);
-}
 
 std::string NotepadController::WaitForInput(const std::function<bool(const std::string &)>& callback) const {
     char* cpCurrent = new char[2048];
@@ -93,12 +85,40 @@ void NotepadController::AddText(const std::string &text) const {
     SendMessage(EditHandle, WM_SETTEXT, 0, (LPARAM)sCurrentText.c_str());
 }
 
-std::string NotepadController::GetText() {
+std::string NotepadController::GetText() const {
     char* cpCurrentText = new char[65535];
     SendMessage(EditHandle, WM_GETTEXT, (WPARAM)65535, (LPARAM)cpCurrentText);
     std::string sCurrentText = std::string(cpCurrentText);
+    return sCurrentText;
 }
 
+std::vector<std::string> NotepadController::SplitString(std::string original, const std::string& delimiter) {
+    std::vector<std::string> tokens;
+    size_t pos;
+    std::string token;
+    while ((pos = original.find(delimiter)) != std::string::npos) {
+        token = original.substr(0, pos);
+        tokens.push_back(token);
+        original.erase(0, pos + delimiter.length());
+    }
+    return tokens;
+}
+
+void NotepadController::MoveCaret(int x, int y) const {
+    std::string sText = GetText();
+    std::vector<std::string> vSplitString = SplitString(sText, "\n");
+    int charPos;
+    if(!vSplitString.empty())
+        charPos = (y * static_cast<int>(vSplitString[0].length())) + x + y;
+    else
+        charPos = x;
+    SendMessage(EditHandle, EM_SETSEL, charPos, charPos);
+}
+
+void NotepadController::MoveCaretDown() const {
+    SendMessage(EditHandle, EM_SETSEL, 0, -1);
+    SendMessage(EditHandle, EM_SETSEL, -1, -1);
+}
 
 
 

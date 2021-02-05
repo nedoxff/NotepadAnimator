@@ -6,7 +6,7 @@
 #include "FfmpegHelper.hpp"
 #include "FrameConverter.hpp"
 int main() {
-    ShowWindow(GetConsoleWindow(), SW_HIDE);
+    /*ShowWindow(GetConsoleWindow(), SW_HIDE);
     NotepadController nc{};
     nc.StartNew();
     nc.SetText("Welcome to NotepadAnimator!\nPlease, enter the path of your video:\n");
@@ -32,6 +32,10 @@ int main() {
     });
     FrameConverter::InitializeGdiplus();
     for(auto& file: DirectoryHelper::SortFiles(L"Frames/Input"))
-		nc.SetText(FrameConverter::Convert(file));
+		nc.SetText(FrameConverter::Convert(file));*/
+    NotepadController nc{};
+    nc.StartNew();
+    nc.SetText("omg did i just implement the caret moving with some cursed code\noh no..");
+    nc.MoveCaret(3, 1);
     return 0;
 }
