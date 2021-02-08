@@ -1,7 +1,4 @@
-//
-// Created by User on 31.01.2021.
-//
-
+// -- includes --
 #include "FfmpegHelper.hpp"
 #include <sstream>
 
@@ -16,9 +13,9 @@ void FfmpegHelper::SplitAudio(const std::filesystem::path& path) {
 
 void FfmpegHelper::SplitFrames(const std::filesystem::path& path) {
     std::stringstream ffmpegAB;
-    ffmpegAB << "ffmpeg.exe -i ";
+    ffmpegAB << "ffmpeg.exe -r 30 -i ";
     ffmpegAB << path.string();
-    ffmpegAB << " -r 30 -vf scale=320:240 Frames/Input/%d.png";
+    ffmpegAB << " -vf scale=-1:64 Frames/Input/%d.png";
     ffmpegAB << " > nul";
     system(ffmpegAB.str().c_str());
 }
